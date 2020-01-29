@@ -18,7 +18,7 @@ public class Enemy_controller : MonoBehaviour {
 
         float distance = Vector3.Distance(target.position, transform.position);
 
-        Debug.Log("distance"+ distance);
+     //   Debug.Log("distance"+ distance);
         if(distance<=lookRadius)
         {
 

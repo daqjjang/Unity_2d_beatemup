@@ -22,7 +22,7 @@ public class player_movement : MonoBehaviour {
     public Animator n_animator;
 
     //jump
-    Rigidbody2D rigidbody_j;
+    Rigidbody rigidbody_j;
     public float axisY;
     public float pre_y;
     public bool isJumping;
@@ -49,7 +49,7 @@ public class player_movement : MonoBehaviour {
 
     void Awake()
     {
-       rigidbody_j = GetComponent<Rigidbody2D>();
+       rigidbody_j = GetComponent<Rigidbody>();
        rigidbody_j.Sleep();
 
     }
@@ -132,9 +132,10 @@ public class player_movement : MonoBehaviour {
     {
 //        main_char.GetCurrentAnimatorStateInfo(0).IsName("Attack2")
         if (punch==0) { 
-        movement = new Vector3(x_input * walkspeed, y_input * walkspeed, 0.0f);
+        movement = new Vector3(x_input * walkspeed, 0.0f, y_input * walkspeed);
         transform.position = transform.position + movement * Time.deltaTime;
         }
+        /*
         if (transform.position.y >= 1.79f)
         {
             
@@ -154,7 +155,7 @@ public class player_movement : MonoBehaviour {
         {
             transform.position = new Vector3(0.5f,transform.position.y, transform.position.z);
 
-        }
+        }*/
         
 
     }
@@ -200,8 +201,8 @@ public class player_movement : MonoBehaviour {
             axisY = transform.position.y;
             isJumping = true;
             
-            rigidbody_j.gravityScale = 1.5f;
-            rigidbody_j.WakeUp();
+           // rigidbody_j.useGravity = 1.5f;
+          //  rigidbody_j.WakeUp();
             rigidbody_j.AddForce(new Vector2(transform.position.x+100.0f*x_input, jumpforce));
 
             n_animator.SetInteger("Jump", 1);
@@ -212,7 +213,7 @@ public class player_movement : MonoBehaviour {
     void OnLanding()
     {
         isJumping = false;
-        rigidbody_j.gravityScale = 0.0f;
+//        rigidbody_j.gravityScale = 0.0f;
         rigidbody_j.Sleep();
         transform.position = new Vector3(transform.position.x, axisY, transform.position.z);
         n_animator.SetInteger("Jump", 0);
